@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-commerce</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Madimi+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header-bar">
+        <div class="logo">QuiSiCompra</div>
+        <button class="filter-btn"><img src="/img/icona-categoria.png" alt="Filtra categorie"></button>
+        <input type="text" class="searchbox" placeholder="Cerca prodotti...">
+        <div class="icons">
+            
+            <span sec:authorize="isAuthenticated()" class="user-username">Ciao, <span sec:authentication="name"></span></span>
+            <a sec:authorize="hasAuthority('ADMIN')" href="/admin/dashboard" class="dashboard-link">Dashboard Admin</a>
+            
+            <a sec:authorize="isAnonymous()" href="/login" class="nav-link">Login</a>
+            
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="logout-link">Logout</button>
+            </form>
+        </div>
+    </header>
+
+   
+    <div class="shop-intro">
+        <div class="intro-text">
+            <img src="/img/logo.svg" alt="Logo e-commerce" class="intro-logo">
+            <h2>Fai shopping con stile!</h2>
+            <p>Scopri tantissimi prodotti unici collezionabili per rendere la tua giornata speciale.</p>
+        </div>
+        <img src="/img/personaggi.png" alt="Personaggi collezionabili" class="intro-img">
+    </div>
+
+
+    <h2 class="catalog-title">Catalogo prodotti</h2>
+    <div class="prodotti-grid">
+      
+        <a th:each="prodotto : ${prodotti}" th:href="@{/prodotto/{id}(id=${prodotto.id})}" class="card-prodotto">
+			<div class="prodotto-img">
+			            <!-- Caso 1: Se l'immagine esiste, mostra il tag <img> -->
+			            <img th:if="${prodotto.immagine != null}"
+			                 th:src="@{/immagine/{id}(id=${prodotto.id})}"
+			                 th:alt="${prodotto.nome}" />
+
+			            <!-- Caso 2: Se l'immagine NON esiste, mostra un riquadro con testo -->
+			            <div th:unless="${prodotto.immagine != null}" class="placeholder-testuale">
+			                <span>Immagine non disponibile</span>
+			            </div>
+			        </div>
+            <div class="prodotto-info">
+                <span class="prodotto-nome" th:text="${prodotto.nome}"></span>
+                <span class="prodotto-tipologia" th:text="${prodotto.tipologia.nome}"></span> 
+                <span class="prodotto-prezzo" th:text="'€ ' + ${prodotto.prezzo}"></span>
+                <p class="prodotto-descrizione" th:text="${prodotto.descrizione}"></p> 
+            </div>
+        </a>
+    </div>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">QuiSiCompra</div>
+            <div class="footer-links">
+                <a href="#">Termini &amp; condizioni</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contatti</a>
+            </div>
+            <div class="footer-social">
+                <span>&copy; 2025 QuiSiCompra</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin - QuiSiCompra</title>
+    <link rel="stylesheet" href="/css/admin-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Madimi+One&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+    <header class="header-bar">
+        <div class="logo">QuiSiCompra</div>
+        <div class="icons">
+            <a href="/" class="nav-link">Torna alla Home</a>
+            <span class="user-username" sec:authentication="name"></span>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="logout-link">Logout</button>
+            </form>
+        </div>
+    </header>
+
+	<div class="dashboard-container">
+	        <div class="admin-header">
+	            <h2>Prodotti</h2>
+	            <a href="/admin/prodotto/new" class="action-btn add-btn">Aggiungi Prodotto</a>
+	        </div>
+
+	        <div class="prodotti-grid">
+	            
+	            <div class="card-prodotto" th:each="p : ${prodotti}">
+	                
+	                <form th:action="@{/admin/prodotto/{id}/delete(id=${p.id})}" method="post" class="delete-form" onsubmit="return confirm('Sei sicuro di voler eliminare questo prodotto?');">
+	                    <button type="submit" class="delete-btn" title="Elimina prodotto">
+	                        🗑️
+	                    </button>
+	                </form>
+	                
+	                <div class="prodotto-img">
+	                    <img th:src="@{/immagine/{id}(id=${p.id})}" th:alt="${p.nome}" />
+	                </div>
+	                <div class="prodotto-info">
+	                    <span class="prodotto-nome" th:text="${p.nome}"></span>
+	                    <span class="prodotto-prezzo" th:text="'€ ' + ${p.prezzo}"></span>
+	                </div>
+	                <div class="card-actions">
+	                    <a th:href="@{/admin/prodotto/{id}/edit(id=${p.id})}" class="action-btn edit-btn">Modifica</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+
+ 
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">QuiSiCompra</div>
+            <div class="footer-links">
+                <a href="#">Termini &amp; condizioni</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contatti</a>
+            </div>
+            <div class="footer-social">
+                <span>&copy; 2025 QuiSiCompra</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

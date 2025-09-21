@@ -1,0 +1,227 @@
+/* Stili generali */
+body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f4faff;
+    padding-bottom: 80px;
+}
+
+/* Navbar */
+.header-bar {
+    background: #1ba1e2;
+    color: #fff;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Madimi One';
+}
+
+.filter-btn {
+    background: transparent;
+    border: none;
+    margin-right: 15px;
+    cursor: pointer;
+    max-height: 2px;
+    max-width: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchbox {
+    flex: 1;
+    margin: 0 20px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    max-width: 1300px;
+    font-size: 16px;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.user-username {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.logout-link {
+    color: #fff;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Sezione introduttiva */
+.shop-intro {
+    display: flex;
+    align-items: center;
+    background: #23d2ea;
+    color: #fff;
+    padding: 25px;
+    border-radius: 14px;
+    margin: 30px auto 20px auto;
+    max-width: 1050px;
+    gap: 30px;
+    box-shadow: 0 4px 24px #1ba1e256;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-logo {
+    height: 45px;
+}
+
+.intro-img {
+    height: 130px;
+}
+
+/* Catalogo prodotti */
+.catalog-title {
+    font-size: 32px;
+    text-align: left;
+    margin: 25px 0 15px 0;
+    color: #2a2626;
+    letter-spacing: 1px;
+    padding: 0 20px;
+}
+
+.prodotti-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.card-prodotto {
+    background: #fff;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #1a1a1a;
+    box-shadow: 0 3px 12px rgba(30,50,70,0.07);
+    transition: transform 0.18s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.card-prodotto:hover {
+    transform: translateY(-7px) scale(1.03);
+    box-shadow: 0 7px 22px rgba(30,50,90,0.18);
+}
+
+.prodotto-img img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.prodotto-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.prodotto-nome {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.prodotto-tipologia {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+.prodotto-prezzo {
+    display: block;
+    color: #e10072;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.prodotto-descrizione {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 40px; /* Abbrevia se troppo lunga */
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #1ba1e2;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.footer-logo {
+    font-family: 'Madimi One';
+    font-size: 24px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    font-size: 14px;
+}

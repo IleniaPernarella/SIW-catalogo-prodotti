@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${prodotto.nome} + ' - QuiSiCompra'"></title>
+    <link rel="stylesheet" href="/css/schedaProdotto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Madimi+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ========= NAVBAR (INVARIATA CON AGGIUNTA LINK HOME) ========= -->
+    <header class="header-bar">
+        <a href="/" class="logo-link"><span class="logo">QuiSiCompra</span></a>
+        <div class="icons">
+            <span sec:authorize="isAuthenticated()" class="user-username"> <span sec:authentication="name"></span></span>
+            <a th:href="@{/}" class="home-link">Home</a>
+            <a sec:authorize="isAnonymous()" th:href="@{/login}" class="nav-link">Login</a>
+            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="logout-link">Logout</button>
+            </form>
+        </div>
+    </header>
+
+    <!-- ========= CORPO PRINCIPALE DELLA PAGINA ========= -->
+    <main class="container">
+
+        <!-- Sezione Dettagli Prodotto -->
+        <section class="product-details-grid">
+            <div class="product-image">
+                <img th:if="${prodotto.immagine != null}" th:src="@{/immagine/{id}(id=${prodotto.id})}" alt="Immagine prodotto">
+                <div th:unless="${prodotto.immagine != null}" class="image-placeholder"><span>Immagine non disponibile</span></div>
+            </div>
+            <div class="product-info">
+                <span class="product-category" th:text="${prodotto.tipologia.nome}">Categoria</span>
+                <h1 class="product-title" th:text="${prodotto.nome}">Nome Prodotto</h1>
+                <p class="product-description" th:text="${prodotto.descrizione}">Descrizione del prodotto.</p>
+              
+                <div class="product-price" th:text="'€' + ${#numbers.formatDecimal(prodotto.prezzo, 1, 'POINT', 2, 'COMMA')}">€0,00</div>
+            </div>
+        </section>
+
+        <!-- Sezione Prodotti Simili -->
+        <section class="similar-products-section" th:if="${!prodottiSimili.isEmpty()}">
+            <h2 class="section-title">Simili:</h2>
+            <div class="similar-products-grid">
+                <a th:each="simile : ${prodottiSimili}" th:href="@{/prodotto/{id}(id=${simile.id})}" class="similar-product-card">
+                    <img th:if="${simile.immagine != null}" th:src="@{/immagine/{id}(id=${simile.id})}" alt="Immagine prodotto simile">
+                    <div th:unless="${simile.immagine != null}" class="image-placeholder-small"></div>
+                    <span class="similar-product-name" th:text="${simile.nome}"></span>
+                    <span class="similar-product-category" th:text="${simile.tipologia.nome}"></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Sezione Form Recensione -->
+        <section class="review-form-section" sec:authorize="isAuthenticated()">
+            <h2 class="section-title">La tua recensione:</h2>
+            <form th:action="@{/prodotto/{id}/commento(id=${prodotto.id})}" method="post" th:object="${newCommento}">
+                <div class="form-group">
+                    <label for="titolo">Titolo*:</label>
+                    <input type="text" id="titolo" th:field="*{titolo}" required>
+                </div>
+                <div class="form-group">
+                    <label for="testo">Descrizione*:</label>
+                    <textarea id="testo" th:field="*{testo}" rows="5" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Invia</button>
+                    <button type="reset" class="cancel-btn">Annulla</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Sezione Lista Recensioni -->
+        <section class="reviews-section">
+            <h2 class="section-title">Recensioni:</h2>
+            <div th:if="${#lists.isEmpty(commenti)}" class="no-reviews">
+                <p>Non ci sono ancora recensioni per questo prodotto. Sii il primo a lasciarne una!</p>
+            </div>
+            <div th:each="commento : ${commenti}" class="review-card">
+                <div class="review-author-icon"></div>
+                <div class="review-content">
+                    <div class="review-header">
+                        <span class="review-title" th:text="${commento.titolo}">Titolo recensione</span>
+                        <!-- MODIFICA QUI: Aggiunta data e ora formattate -->
+                        <span class="review-author" th:text="' - ' + ${commento.autore.nome} + ' • ' + ${#temporals.format(commento.data, 'dd/MM/yyyy HH:mm')}"></span>
+                    </div>
+                    <p class="review-text" th:text="${commento.testo}">Testo della recensione.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========= FOOTER (INVARIATO) ========= -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">QuiSiCompra</div>
+            <div class="footer-links">
+                <a href="#">Termini &amp; condizioni</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contatti</a>
+            </div>
+            <div class="footer-social">
+                <span>&copy; 2025 QuiSiCompra</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,210 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f9f9f9;
+    padding-bottom: 100px;
+}
+
+.header-bar {
+    background: #1ba1e2;
+    color: #fff;
+    padding: 25px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Madimi One';
+}
+
+.icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.user-username {
+    color: #fff;
+    font-weight: bold;
+}
+
+.logout-link {
+    color: #fff;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.admin-header h2 {
+    font-size: 28px;
+    color: #333;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-btn {
+    background-color: #1ba1e2;
+    color: white;
+}
+
+.add-btn:hover {
+    background-color: #157da9;
+}
+
+.prodotti-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.card-prodotto {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-align: center;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s;
+    position: relative;
+}
+
+.card-prodotto:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.delete-form {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.delete-btn {
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #e74c3c;
+    line-height: 1;
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.prodotto-img img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: contain;
+}
+
+.prodotto-info {
+    margin: 15px 0;
+}
+
+.prodotto-nome {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.prodotto-prezzo {
+    display: block;
+    color: #e10072;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card-actions .edit-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 14px;
+    padding: 8px 16px;
+}
+
+.card-actions .edit-btn:hover {
+    background-color: #e0e0e0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #1ba1e2;
+    color: white;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.footer-logo {
+    font-family: 'Madimi One';
+    font-size: 24px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}

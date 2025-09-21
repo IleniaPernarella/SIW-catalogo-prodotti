@@ -1,0 +1,248 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    padding-bottom: 120px; 
+}
+
+
+.header-bar {
+    background: #1ba1e2;
+    color: #fff;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.logo-link { text-decoration: none; }
+.logo { font-size: 28px; font-weight: bold; font-family: 'Madimi One'; color: #fff; }
+.icons { display: flex; gap: 20px; align-items: center; }
+.nav-link, .logout-link, .home-link { color: #fff; text-decoration: none; font-weight: bold; font-size: 16px; background: none; border: none; cursor: pointer; }
+.user-username { color: #fff; font-weight: bold; }
+
+
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 22px;
+    color: #1ba1e2;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+
+.product-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+.product-image {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+}
+.product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.product-info .product-category {
+    color: #888;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.product-info .product-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+}
+.product-info .product-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.product-info  {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 25px;
+}
+.product-info .product-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1ba1e2;
+    background-color: #e8f6fd;
+    padding: 8px 16px;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+
+.similar-products-section {
+    margin-bottom: 60px;
+}
+.similar-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+}
+.similar-product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.similar-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.similar-product-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.similar-product-name {
+    display: block;
+    font-weight: bold;
+}
+.similar-product-category {
+    font-size: 12px;
+    color: #888;
+}
+
+
+.review-form-section {
+    margin-bottom: 60px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.form-actions { display: flex; gap: 10px; }
+.submit-btn, .cancel-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+}
+.submit-btn { background-color: #1ba1e2; color: #fff; }
+.cancel-btn { background-color: #e0e0e0; color: #333; }
+
+
+.reviews-section .no-reviews { color: #777; }
+.review-card {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+.review-card:last-child { border-bottom: none; }
+.review-author-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #e8f6fd;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.review-header { margin-bottom: 5px; }
+.review-title { font-weight: bold; }
+.review-author { color: #777; font-size: 12px; }
+.review-text { margin: 0; color: #333; line-height: 1.5; }
+
+
+.image-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px; 
+    background-color: #f5f5f5;
+    color: #ccc;
+    border-radius: 12px;
+}
+.image-placeholder-small {
+    width: 100%;
+    height: 140px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #1ba1e2;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.footer-logo {
+    font-family: 'Madimi One';
+    font-size: 24px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-social {
+    font-size: 14px;
+}

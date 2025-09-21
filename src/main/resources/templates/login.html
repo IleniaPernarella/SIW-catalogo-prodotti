@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - QuiSiCompra</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-bar">
+            <span class="logo">QuiSiCompra</span>
+            <div class="icons">
+                <a href="/" class="nav-link">Home</a>
+                <div sec:authorize="isAnonymous()">
+                    <a href="/register" class="nav-link">Registrati</a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <span class="user-username" sec:authentication="name"></span>
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="logout-link">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="login-container">
+            <h2 class="welcome-text">Bentornat* su<br><span class="logo-quisicompra">QUISICOMPRA</span></h2>
+			<form th:action="@{/login}" method="post">
+			    <label for="username" class="label-input">Username</label>
+			    <input type="text" id="username" name="username" class="input-text" required maxlength="255" placeholder="Inserisci username">
+
+			    <label for="password" class="label-input">Password</label>
+			    <input type="password" id="password" name="password" class="input-text" required maxlength="255" placeholder="Inserisci password">
+
+			    <div th:if="${error}" style="color: red; margin-bottom: 20px; text-align: center;">
+			        <span th:text="${error}"></span>
+			    </div>
+
+			    <button type="submit" class="confirm-button">Conferma</button>
+			</form>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">QuiSiCompra</div>
+            <div class="footer-links">
+                <a href="#">Termini &amp; condizioni</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contatti</a>
+            </div>
+            <div class="footer-social">
+                <span>&copy; 2025 QuiSiCompra</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
