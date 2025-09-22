@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import it.uniroma3.siw.model.Prodotto;
 import it.uniroma3.siw.service.CommentoService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.ProdottoService;
+import it.uniroma3.siw.service.TipologiaService;
 
 
 
@@ -34,10 +36,32 @@ public class ProdottoController {
 	CommentoService commentoService;
 	@Autowired
 	CredentialsService credentialsService;
+	@Autowired
+	TipologiaService tipologiaService;
 
 	@GetMapping("/")
-	private String mostraCatalogo(Model model) {
-		model.addAttribute("prodotti", prodottoService.getAllProdotti());
+	private String mostraCatalogo(Model model,@RequestParam(value="tipologiaId",required=false)Long tipologiaId,
+									@RequestParam(value="keyword",required=false)String keyword) {
+		
+		List<Prodotto> prodotti;
+		
+		//trim() rimuove spazi bianchi
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            prodotti = prodottoService.cercaByKeyword(keyword);
+        }
+        
+        else if (tipologiaId != null) {
+            prodotti = prodottoService.findByTipologiaId(tipologiaId);
+        } 
+        
+        else {
+            prodotti = (List<Prodotto>) prodottoService.getAllProdotti();
+        }
+		
+		model.addAttribute("prodotti", prodotti);
+		model.addAttribute("tipologie",tipologiaService.getAllTipologie());
+		model.addAttribute("selectedTipologiaId", tipologiaId);
+		
 		return "home";
 	}
 	

@@ -8,6 +8,7 @@ import it.uniroma3.siw.model.Prodotto;
 import it.uniroma3.siw.repository.ProdottoRepository;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -51,4 +52,28 @@ public class ProdottoService {
 	    return prodotto.getProdottiSimili();
 	}
 
+	public List<Prodotto> findByTipologiaId(Long tipologiaId){
+		
+		List<Prodotto> prodottiFiltrati = new ArrayList<>();
+		
+		for(Prodotto p : getAllProdotti()) {
+			if(p.getTipologia()!=null && p.getTipologia().getId().equals(tipologiaId))
+				prodottiFiltrati.add(p);
+		}
+		return prodottiFiltrati;
+	}
+	
+	public List<Prodotto> cercaByKeyword(String keyword){
+		
+		List<Prodotto> prodottiFiltrati = new ArrayList<>();
+		String lowerCaseKeyword = keyword.toLowerCase(); //case insensitive
+		
+		for(Prodotto p : getAllProdotti()) {
+			if(p!=null && p.getNome().toLowerCase().contains(lowerCaseKeyword)) {
+				prodottiFiltrati.add(p);
+			}
+		}
+		return prodottiFiltrati;
+		
+	}
 }
