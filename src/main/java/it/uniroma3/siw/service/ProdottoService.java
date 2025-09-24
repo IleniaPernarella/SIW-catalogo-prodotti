@@ -26,54 +26,44 @@ public class ProdottoService {
         return prodottoRepository.findById(id).orElse(null);
     }
 
- 
-    public void salvaProdotto(Prodotto prodotto, MultipartFile immagine) {
-        try {
-     
-            if (immagine != null && !immagine.isEmpty()) {
-                prodotto.setImmagine(immagine.getBytes());
+    public void salvaProdotto(Prodotto prodotto) {
+        prodottoRepository.save(prodotto);
+    }
+
+    public void eliminaProdottoById(Long id) {
+        Prodotto prodotto = findById(id);
+        if (prodotto != null) {
+            // Rimuove le relazioni bidirezionali prima di eliminare
+            for (Prodotto simile : new ArrayList<>(prodotto.getProdottiSimili())) {
+                prodotto.removeProdottoSimile(simile);
             }
-            prodottoRepository.save(prodotto);
-        } catch (IOException e) {
-            throw new RuntimeException("Errore durante il salvataggio dell'immagine", e);
+            prodottoRepository.delete(prodotto);
         }
     }
 
-	public void eliminaProdottoById(Long id) {
-		prodottoRepository.deleteById(id);
-		
-	}
-	
-	public List<Prodotto> getProdottiSimili(Long prodottoId) {
-	    //trova il prodotto principale 
-	    Prodotto prodotto = this.findById(prodottoId); 
-	    
-	    //restituisce la sua lista di prodotti simili
-	    return prodotto.getProdottiSimili();
-	}
+    public List<Prodotto> getProdottiSimili(Long prodottoId) {
+        Prodotto prodotto = this.findById(prodottoId);
+        return prodotto != null ? prodotto.getProdottiSimili() : new ArrayList<>();
+    }
 
-	public List<Prodotto> findByTipologiaId(Long tipologiaId){
-		
-		List<Prodotto> prodottiFiltrati = new ArrayList<>();
-		
-		for(Prodotto p : getAllProdotti()) {
-			if(p.getTipologia()!=null && p.getTipologia().getId().equals(tipologiaId))
-				prodottiFiltrati.add(p);
-		}
-		return prodottiFiltrati;
-	}
-	
-	public List<Prodotto> cercaByKeyword(String keyword){
-		
-		List<Prodotto> prodottiFiltrati = new ArrayList<>();
-		String lowerCaseKeyword = keyword.toLowerCase(); //case insensitive
-		
-		for(Prodotto p : getAllProdotti()) {
-			if(p!=null && p.getNome().toLowerCase().contains(lowerCaseKeyword)) {
-				prodottiFiltrati.add(p);
-			}
-		}
-		return prodottiFiltrati;
-		
-	}
+    public List<Prodotto> findByTipologiaId(Long tipologiaId) {
+        List<Prodotto> prodottiFiltrati = new ArrayList<>();
+        for (Prodotto p : getAllProdotti()) {
+            if (p.getTipologia() != null && p.getTipologia().getId().equals(tipologiaId)) {
+                prodottiFiltrati.add(p);
+            }
+        }
+        return prodottiFiltrati;
+    }
+
+    public List<Prodotto> cercaByKeyword(String keyword) {
+        List<Prodotto> prodottiFiltrati = new ArrayList<>();
+        String lowerCaseKeyword = keyword.toLowerCase();
+        for (Prodotto p : getAllProdotti()) {
+            if (p != null && p.getNome().toLowerCase().contains(lowerCaseKeyword)) {
+                prodottiFiltrati.add(p);
+            }
+        }
+        return prodottiFiltrati;
+    }
 }

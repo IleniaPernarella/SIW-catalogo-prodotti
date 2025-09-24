@@ -200,6 +200,7 @@ body {
     object-fit: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+	margin-top: 5px;
 }
 .placeholder-testuale {
     width: 100%;

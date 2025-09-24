@@ -39,17 +39,24 @@
         </section>
 
         
-        <section class="similar-products-section" th:if="${!prodottiSimili.isEmpty()}">
-            <h2 class="section-title">Simili:</h2>
-            <div class="similar-products-grid">
-                <a th:each="simile : ${prodottiSimili}" th:href="@{/prodotto/{id}(id=${simile.id})}" class="similar-product-card">
-                    <img th:if="${simile.immagine != null}" th:src="@{/immagine/{id}(id=${simile.id})}" alt="Immagine prodotto simile">
-                    <div th:unless="${simile.immagine != null}" class="image-placeholder-small"></div>
-                    <span class="similar-product-name" th:text="${simile.nome}"></span>
-                    <span class="similar-product-category" th:text="${simile.tipologia.nome}"></span>
-                </a>
-            </div>
-        </section>
+		<section class="similar-products-section" 
+		         th:if="${prodottiSimili != null and !prodottiSimili.isEmpty()}">
+		    <h2 class="section-title">Prodotti Simili</h2>
+		    <div class="similar-products-grid">
+		        <a th:each="simile : ${prodottiSimili}" 
+		           th:href="@{/prodotto/{id}(id=${simile.id})}" 
+		           class="similar-product-card">
+		            <img th:if="${simile.immagine != null}" 
+		                 th:src="@{/immagine/{id}(id=${simile.id})}" 
+		                 alt="Immagine prodotto simile">
+		            <div th:unless="${simile.immagine != null}" class="image-placeholder-small"></div>
+		            <span th:text="${simile.nome}" class="similar-product-name"></span>
+		            <span th:text="${simile.tipologia != null ? simile.tipologia.nome : ''}" 
+		                  class="similar-product-category"></span>
+		        </a>
+		    </div>
+		</section>
+
        
         <section class="review-form-section" sec:authorize="isAuthenticated()">
             <h2 class="section-title">La tua recensione:</h2>
